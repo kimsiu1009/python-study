@@ -1,0 +1,16 @@
+event(이벤트)
+- 화면에서 마우스를 클릭할때
+                 드레그
+
+t.onscreenclick()
+screen에서 마우스를 클릭하면 event를 발생시키는 함수
+
+t.listen()
+듣기
+
+onkeypress()
+(예)키보드를 "g"key를 누르면, green_color 함수를 실행한다
+
+()
+매개변수
+

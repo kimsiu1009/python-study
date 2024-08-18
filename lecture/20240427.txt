@@ -1,0 +1,20 @@
+goto()
+           |
+           |(100)
+           |
+-----------|
+    (100)
+
+pos()
+현재 turtle에 좌표값을 얻는다
+
+for i in range(a):
+    t.forward(100)
+    t.left(360/a)
+다각형 그리는 공식
+
+t.bgcolor()
+bg = BackGround (바탕)
+
+t.setheading()
+동쪽에서 반시계 방향으로 turtle에 방향을 전환한다(바꾼다)

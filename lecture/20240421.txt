@@ -1,0 +1,55 @@
+import turtle as t
+t.Turtle()
+
+t.mainloop()
+처음 시작
+
+t.forward()
+앞으로 가기
+
+t.left()
+방향 틀기
+
+t.color()
+색깔 변화.pensize
+
+t.width()
+굵게 변화
+
+t.up()
+선을 긋지 않고 이동할때
+
+t.down()
+펜 내리기
+
+
+t.up()
+t.forward()
+선을 긋지 않고 바로 이동할때
+
+t.home()
+0.0으로 돌아가기
+
+t.pos()
+위치 알려주기
+
+(예)range(100)
+0 ~ 99
+
+t.speed()
+빠르게(0(제일 빠르게))
+
+abs()
+함수는 절대값을 반환
+절대값 = + = +
+        - = +
+
+t.shape()
+모양 바꾸기
+('turtle', 'square', 'arrow', 'circle')
+    (y)
+     |
+     |
+-----|-----(x)
+     |
+     |

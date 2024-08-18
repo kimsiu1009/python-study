@@ -1,0 +1,5 @@
+t.textinput()
+t.textinput("제목", "prompt)
+
+t.write()
+t.write("출력 문자열", False, algim = "center"(글자 마춤), font = (font의 이름", size))

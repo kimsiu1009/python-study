@@ -1,0 +1,64 @@
+별 그리는 방법1
+=====================
+import turlte as t
+
+t.color("gold")
+t.begin_fill
+for i in range(5):
+    t.forward(100)
+    t.left(72)
+    t.forward(100)
+    t.right(144)
+
+t.end_fill()
+
+mainloop()
+
+(채워지지 않는)별 그리는 방법2
+=====================
+import turlte as t
+
+t.up()
+t.goto(-300, 300)
+t.down()
+
+t.color("gold")
+t.fillcolor("gold")
+t.begin_fill()
+for i in range(5):
+    t.forward(100)
+    t.right(144)
+t.end_fill() 
+
+mainloop()
+
+random 사용법
+======================
+목차
+1. random.randint() 사용법
+2. random.choice() 사용법
+
+1. random.randint() 사용법
+======================
+import random
+
+result = random.randint(1, 100)
+
+print(result)
+
+2. random.choice() 사용법 : 리스트나 튜플로 미리 정해진 값 중에서 무작위로 하나를 선택한다.
+
+color = ["gold", "pink", "white", "lightblue", "lavendor"]
+
+result = random.choice(color)
+
+print(result)
+
+turlte 색상 종류
+https://shindeacon.co.kr/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%84%B0%ED%8B%80-%EA%B7%B8%EB%9E%98%ED%94%BD%EC%97%90%EC%84%9C-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%BB%AC%EB%9F%AC-%EB%A6%AC%EC%8A%A4%ED%8A%B8/
+
+begin_fill()
+색깔 시작
+
+end_fill
+색깔 끝냄

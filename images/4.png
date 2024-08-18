@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)https://xe.obg.co.kr/programming/2677 -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- META -->
+
+<meta name="generator" content="Rhymix">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="csrf-token" content="ud7YCPfmnFIH0S2B">
+
+<!-- TITLE -->
+<title>OBG Home - [농장게임 만들기] 2. Nubcake Farms 클래스 분석</title>
+
+<!-- CSS -->
+<link rel="stylesheet" href="./4_files/c7fe3c3a45dd097cdb26bde569e5db55352da7cc.rhymix.scss.min.css">
+<link rel="stylesheet" href="./4_files/jquery-ui.min.css">
+<link rel="stylesheet" href="./4_files/xeicon.min.css">
+<link rel="stylesheet" href="./4_files/layout.css">
+<link rel="stylesheet" href="./4_files/idangerous.swiper.css">
+<link rel="stylesheet" href="./4_files/welcome.css">
+<link rel="stylesheet" href="./4_files/webfont.css">
+<link rel="stylesheet" href="./4_files/widget.login.css">
+<link rel="stylesheet" href="./4_files/font-awesome.min.css">
+<link rel="stylesheet" href="./4_files/board.css">
+<link rel="stylesheet" href="./4_files/ie8.css">
+<link rel="stylesheet" href="./4_files/ncenter.css">
+
+<!-- JS -->
+<script type="text/javascript" async="" src="./4_files/analytics.js.다운로드"></script><script type="text/javascript" async="" src="./4_files/js"></script><script src="./4_files/jquery-2.2.4.min.js.다운로드"></script>
+<script src="./4_files/rhymix.min.js.다운로드"></script>
+<script src="./4_files/board.js.다운로드"></script>
+<script src="./4_files/layout.js.다운로드"></script>
+<script src="./4_files/jquery.parallax-scroll.min.js.다운로드"></script>
+
+<!-- RSS -->
+
+<!-- ICONS AND OTHER LINKS -->
+<link rel="canonical" href="https://xe.obg.co.kr/programming/2677">
+
+<!-- OTHER HEADERS -->
+<meta property="og:url" content="https://xe.obg.co.kr/programming/2677">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="./4_files/js(1)"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-46335818-1');
+</script>
+<style data-id="bdCss">
+.bd em,.bd .color{color:#333333;}
+.bd .shadow{text-shadow:1px 1px 1px ;}
+.bd .bolder{color:#333333;text-shadow:2px 2px 4px ;}
+.bd .bg_color{background-color:#333333;}
+.bd .bg_f_color{background-color:#333333;background:-webkit-linear-gradient(#FFF -50%,#333333 50%);background:linear-gradient(to bottom,#FFF -50%,#333333 50%);}
+.bd .border_color{border-color:#333333;}
+.bd .bx_shadow{box-shadow:0 0 2px ;}
+.viewer_with.on:before{background-color:#333333;box-shadow:0 0 2px #333333;}
+
+
+.bd_zine .info b,.bd_zine .info a{color:;}
+.bd_zine.card h3{color:#333333;}
+
+.bd_tb_lst .cate span,.bd_tb_lst .author span,.bd_tb_lst .last_post small{max-width:px}
+</style>
+</head>
+
+<!-- BODY START -->
+<body class="color_scheme_light">
+
+<!-- COMMON JS VARIABLES -->
+<script>
+	var default_url = "https://xe.obg.co.kr/";
+	var current_url = "https://xe.obg.co.kr/?mid=programming&document_srl=2677";
+	var request_uri = "https://xe.obg.co.kr/";
+	var current_lang = xe.current_lang = "ko";
+	var current_mid = "programming";
+	var http_port = null;
+	var https_port = null;
+	var enforce_ssl = true;
+	var cookies_ssl = false;
+	var rewrite_level = 1;
+	if (detectColorScheme) detectColorScheme();
+</script>
+
+<!-- PAGE CONTENT -->
+
+
+
+	
+								
+
+													
+					
+	
+	
+
+					
+		
+
+													
+
+			
+
+	
+		
+	
+
+
+
+
+
+
+<p class="skip"><a href="https://xe.obg.co.kr/programming/2677#content">메뉴 건너뛰기</a></p>
+<div class="container fixed_header ">
+
+	<!-- HEADER -->
+	<div class="header_wrap xe-clearfix shrink">
+	<div class="search_wrap">
+			<div class="search_area">
+				<!-- SEARCH -->
+				<form action="https://xe.obg.co.kr/" method="get" class="search">
+					<input type="hidden" name="mid" value="programming">
+					<input type="hidden" name="act" value="IS">
+					<input type="text" name="is_keyword" value="" required="required" title="검색" placeholder="Search">
+				</form>
+				<!-- /SEARCH -->
+				<a href="https://xe.obg.co.kr/programming/2677#" class="btn_close" title="검색창 닫기" onclick="return false"><i class="xi-close"></i><span class="blind">검색창 닫기</span></a>
+			</div>
+		</div>
+		<header class="header sub">
+			
+			<h1 class="logo-item">
+							<a href="https://xe.obg.co.kr/">
+		OBG					</a>
+			</h1>
+			
+
+			<div class="side">
+				<ul>
+					<!-- search -->
+	<li class="click">
+						<a href="https://xe.obg.co.kr/programming/2677#" title="검색"><i class="xi-magnifier"></i><span class="blind">검색</span></a>
+					</li>					<!-- admin -->
+						<!-- login -->
+					<li class="hover">
+								<!-- before_login -->
+							<a href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispMemberLoginForm" id="ly_btn"><i class="xi-user"></i><span class="blind">로그인/회원가입</span></a>
+							<div class="ly ly_login">
+								<ul>
+									<li><a id="ly_login_btn" href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispMemberLoginForm">로그인</a></li>
+									<li><a href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispMemberSignUpForm">회원가입</a></li>
+								</ul>
+								<span class="edge"></span>
+							</div>
+							<!-- /before_login -->
+						</li>
+				</ul>
+			</div>
+
+			<!-- SNB -->
+	
+			<!-- GNB -->
+	<nav class="gnb pc-gnb" id="gnb">
+				<div id="mobile_menu_btn" class="menu_btn">
+					<div class="menu_bar">
+						<div class="btn1"></div>
+						<div class="btn2"></div>
+						<div class="btn3"></div>
+					</div>
+				</div>
+				<ul>
+	<li class="">
+						<a href="https://xe.obg.co.kr/freeboard">게시판</a>
+		<ul class="depth2" style="display: none;">
+	<li>
+								<a href="https://xe.obg.co.kr/freeboard">자유게시판</a>
+								</li><li>
+								<a href="https://xe.obg.co.kr/infoboard">정보게시판</a>
+								</li><li>
+								<a href="https://xe.obg.co.kr/programming">Programming</a>
+								</li>						</ul>					</li><li>
+						<a href="https://xe.obg.co.kr/picture">사진첩</a>
+							</li><li class="">
+						<a href="https://xe.obg.co.kr/mediascrap">스크랩</a>
+		<ul class="depth2" style="display: none;">
+	<li>
+								<a href="https://xe.obg.co.kr/mediascrap">미디어스크랩</a>
+								</li><li>
+								<a href="https://xe.obg.co.kr/linkscrap">링크스크랩</a>
+								</li><li>
+								<a href="https://xe.obg.co.kr/jjalbang">짤방</a>
+								</li>						</ul>					</li><li>
+						<a href="https://xe.obg.co.kr/server_log">한줄메모</a>
+		<ul class="depth2" style="display: none;">
+	<li>
+								<a href="https://xe.obg.co.kr/server_log">서버 관리 기록</a>
+								</li>						</ul>					</li>				</ul>
+			</nav>			<!-- /GNB -->
+		</header>
+	</div>
+	<!-- END:HEADER -->
+
+	<!-- VISUAL-SUBHEADER -->
+	<div class="visual sub">
+					<span class="bg_img" style="background-image:url(&#39;./layouts/xedition/img/sub_banner_01.jpg&#39;)"></span>
+		<span class="mask"></span>
+		<div class="sub_title">
+			<h1>Programming</h1>
+		</div>
+	</div>    <!-- Swiper -->
+		<!-- /VISUAL -->
+
+	<!-- BODY -->
+	<div class="body fixed-width sub right">
+		<!-- LNB -->
+	<nav class="lnb">
+			<ul>
+	<li>
+					<a href="https://xe.obg.co.kr/freeboard">자유게시판</a>
+					</li><li>
+					<a href="https://xe.obg.co.kr/infoboard">정보게시판</a>
+					</li><li>
+					<a href="https://xe.obg.co.kr/programming">Programming</a>
+					</li>			</ul>
+		</nav>		<!-- /LNB -->
+		<!-- CONTENT -->
+			<div class="content" id="content">
+	
+
+
+
+<!--#JSPLUGIN:ui-->
+
+
+
+
+<script>//<![CDATA[
+var lang_type = "ko";
+var bdLogin = "로그인 하시겠습니까?@/index.php?mid=programming&document_srl=2677&act=dispMemberLoginForm";
+jQuery(function($){
+	board('#bd_1178_2677');
+	$.cookie('bd_viewer_font',$('body').css('font-family'));
+});
+//]]></script>
+
+
+
+
+<div></div>
+<div id="bd_1178_2677" class="bd   hover_effect" data-default_style="list" data-bdfilestype="">
+
+
+
+
+<div class="bd_hd v2 clear">
+	<div class="bd_bc fl">
+	<a href="https://xe.obg.co.kr/"><strong>Home</strong></a>
+	</div>
+	
+	<div class="bd_font m_no fr" style="display:none">
+		<a class="select tg_btn2" href="https://xe.obg.co.kr/programming/2677#" data-href=".bd_font_select"><b>T</b><strong>기본글꼴</strong><span class="arrow down"></span></a>
+		<div class="bd_font_select tg_cnt2"><button type="button" class="tg_blur2"></button>
+			<ul>
+				<li class="ui_font on"><a href="https://xe.obg.co.kr/programming/2677#" title="사이트 기본 글꼴을 유지합니다">기본글꼴</a><em>✔</em></li>
+				<li class="ng"><a href="https://xe.obg.co.kr/programming/2677#">나눔고딕</a><em>✔</em></li>
+				<li class="window_font"><a href="https://xe.obg.co.kr/programming/2677#">맑은고딕</a><em>✔</em></li>
+				<li class="tahoma"><a href="https://xe.obg.co.kr/programming/2677#">돋움</a><em>✔</em></li>
+			</ul><button type="button" class="tg_blur2"></button>
+		</div>
+	</div>	
+	<div class="bd_set fr m_btn_wrp m_no">
+		<a class="bg_f_f9" href="https://xe.obg.co.kr/programming/2677#" onclick="window.open(&#39;/programming/2677?listStyle=viewer&#39;,&#39;viewer&#39;,&#39;width=9999,height=9999,scrollbars=yes,resizable=yes,toolbars=no&#39;);return false"><em>✔</em> <strong>뷰어로 보기</strong></a>						</div>
+	
+	</div>
+
+
+
+<div class="rd rd_nav_style2 clear" style="padding:;" data-docsrl="2677">
+	
+	<div class="rd_hd clear" style="margin:0 -15px 20px">
+		
+	<div class="board clear " style=";">
+			<div class="top_area ngeb" style=";">
+	<strong class="cate fl" title="Category">Python</strong>				<div class="fr">
+		<span class="date m_no">2014.04.26 22:10</span>				</div>
+				<h1 class="np_18px"><a href="https://xe.obg.co.kr/programming/2677">[농장게임 만들기] 2. Nubcake Farms 클래스 분석</a></h1>
+			</div>
+			<div class="btm_area clear">
+					<div class="side">
+	<a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="nick member_4" onclick="return false">OBG</a>								</div>
+				<div class="side fr">
+							<span>조회 수 <b>738</b></span>	<span>추천 수 <b>0</b></span>	<span>댓글 <b>3</b></span>					</div>
+				
+				</div>
+		</div>		
+	
+		
+			
+			
+			
+			
+	<div class="rd_nav img_tx fr m_btn_wrp">
+		<div class="help bubble left m_no">
+		<a class="text" href="https://xe.obg.co.kr/programming/2677#" onclick="jQuery(this).next().fadeToggle();return false;">?</a>
+		<div class="wrp">
+			<div class="speech">
+				<h4>단축키</h4>
+				<p><strong><i class="fa fa-long-arrow-left"></i><span class="blind">Prev</span></strong>이전 문서</p>
+				<p><strong><i class="fa fa-long-arrow-right"></i><span class="blind">Next</span></strong>다음 문서</p>
+				</div>
+			<i class="edge"></i>
+			<i class="ie8_only bl"></i><i class="ie8_only br"></i>
+		</div>
+	</div>	<a class="tg_btn2 bubble m_no" href="https://xe.obg.co.kr/programming/2677#" data-href=".bd_font_select"><strong>가</strong><i class="arrow down"></i><span class="wrp" style="margin-left: -27px;"><span class="speech">글꼴 선택</span><i class="edge"></i></span></a>	<a class="font_plus bubble" href="https://xe.obg.co.kr/programming/2677#" title="크게"><i class="fa fa-search-plus"></i><b class="tx">크게</b></a>
+	<a class="font_minus bubble" href="https://xe.obg.co.kr/programming/2677#" title="작게"><i class="fa fa-search-minus"></i><b class="tx">작게</b></a>
+			<a class="back_to bubble m_no" href="https://xe.obg.co.kr/programming/2677#bd_1178_2677"><i class="fa fa-arrow-up"></i><b class="tx">위로</b><span class="wrp" style="margin-left: -16px;"><span class="speech">위로</span><i class="edge"></i></span></a>
+	<a class="back_to bubble m_no" href="https://xe.obg.co.kr/programming/2677#rd_end_2677" title="(목록) 아래로"><i class="fa fa-arrow-down"></i><b class="tx">아래로</b></a>
+	<a class="comment back_to bubble if_viewer m_no" href="https://xe.obg.co.kr/programming/2677#2677_comment" title="댓글로 가기"><i class="fa fa-comment"></i><b class="tx">댓글로 가기</b></a>
+	<a class="print_doc bubble m_no" href="https://xe.obg.co.kr/programming/2677?listStyle=viewer" title="인쇄"><i class="fa fa-print"></i><b class="tx">인쇄</b></a>	<a class="file back_to bubble m_no" href="https://xe.obg.co.kr/programming/2677#files_2677" onclick="jQuery(&#39;#files_2677&#39;).show();return false" title="첨부"><i class="fa fa-paperclip"></i><b class="tx">첨부</b></a>		</div>
+	<div class="rd_nav_side">
+	<div class="rd_nav img_tx fr m_btn_wrp" style="display: none;">
+		<div class="help bubble left m_no">
+		<a class="text" href="https://xe.obg.co.kr/programming/2677#" onclick="jQuery(this).next().fadeToggle();return false;">?</a>
+		<div class="wrp">
+			<div class="speech">
+				<h4>단축키</h4>
+				<p><strong><i class="fa fa-long-arrow-left"></i><span class="blind">Prev</span></strong>이전 문서</p>
+				<p><strong><i class="fa fa-long-arrow-right"></i><span class="blind">Next</span></strong>다음 문서</p>
+				</div>
+			<i class="edge"></i>
+			<i class="ie8_only bl"></i><i class="ie8_only br"></i>
+		</div>
+	</div>	<a class="tg_btn2 bubble m_no" href="https://xe.obg.co.kr/programming/2677#" data-href=".bd_font_select" title="글꼴 선택"><strong>가</strong><i class="arrow down"></i></a>	<a class="font_plus bubble" href="https://xe.obg.co.kr/programming/2677#" title="크게"><i class="fa fa-search-plus"></i><b class="tx">크게</b></a>
+	<a class="font_minus bubble" href="https://xe.obg.co.kr/programming/2677#" title="작게"><i class="fa fa-search-minus"></i><b class="tx">작게</b></a>
+			<a class="back_to bubble m_no" href="https://xe.obg.co.kr/programming/2677#bd_1178_2677" title="위로"><i class="fa fa-arrow-up"></i><b class="tx">위로</b></a>
+	<a class="back_to bubble m_no" href="https://xe.obg.co.kr/programming/2677#rd_end_2677" title="(목록) 아래로"><i class="fa fa-arrow-down"></i><b class="tx">아래로</b></a>
+	<a class="comment back_to bubble if_viewer m_no" href="https://xe.obg.co.kr/programming/2677#2677_comment" title="댓글로 가기"><i class="fa fa-comment"></i><b class="tx">댓글로 가기</b></a>
+	<a class="print_doc bubble m_no" href="https://xe.obg.co.kr/programming/2677?listStyle=viewer" title="인쇄"><i class="fa fa-print"></i><b class="tx">인쇄</b></a>	<a class="file back_to bubble m_no" href="https://xe.obg.co.kr/programming/2677#files_2677" onclick="jQuery(&#39;#files_2677&#39;).show();return false" title="첨부"><i class="fa fa-paperclip"></i><b class="tx">첨부</b></a>		</div>
+		</div>		</div>
+
+	
+	
+	
+	<div class="rd_body clear">
+		
+			
+			
+			<article><!--BeforeDocument(2677,4)--><div class="document_2677_4 rhymix_content xe_content"><p>개인적으로 '게임 프로그래밍의 정석'이란 책을 재미있게 보고 있다.(언어 - C++) 이 책에선 게임 개발을 단계적으로 보여주면서 '게임 개발은 이렇게 하는 거다'라는 것을 알려준다. 나도 그렇게 하고 싶으나 책을 쓰려고 하는 강좌가 아니므로 그렇게까진 못하겠고 '남의 소스 코드 분석은 이렇게 하는 거다'라는 것을 어느 정도 알려주겠다.</p>
+
+<p>&nbsp;</p>
+
+<p>소스 코드 분석에 있어 가장 핵심적인 것은 클래스 구조이다. UML, 그 중에서도 Class Diagram이라는 것이 괜히 있는 것이 아니다. 아무리 처음 보는 소스라도 Class Diagram이라는 것이 있으면 반은 이해할 수 있다. UML에 대해서는 다음 페이지를 참고한다.</p>
+
+<p>&nbsp;</p>
+
+<p><a href="http://www.obg.co.kr/doku/doku.php?id=programming:design_pattern:uml" target="_blank">http://www.obg.co.kr/doku/doku.php?id=programming:design_pattern:uml</a></p>
+
+<p>&nbsp;</p>
+
+<p>이 강좌는 게임 개발을 거의 처음하는 사람들을 위한 것이기 때문에 UML을 다루진 않겠다. 그냥 간단히 어느 클래스가 있으며 그 클래스가 하는 일은 무엇인지만 간단히 정리해보겠다.</p>
+
+<p>&nbsp;</p>
+
+<p>먼저&nbsp;Nubcake Farms 소스에는 다음과 같은 클래스를 포함하고 있다.</p>
+
+<p>&nbsp;</p>
+
+<p>1.&nbsp;Farmer 클래스</p>
+
+<p>2.&nbsp;Fence 클래스</p>
+
+<p>3.&nbsp;Plot 클래스</p>
+
+<p>4.&nbsp;Well 클래스</p>
+
+<p>5.&nbsp;WateringCan 클래스</p>
+
+<p>6.&nbsp;HUD_Sprite 클래스</p>
+
+<p>7.&nbsp;Wheat_Plant 클래스</p>
+
+<p>8.&nbsp;Shop 클래스</p>
+
+<p>&nbsp;</p>
+
+<p>위 클래스들은 모두 pygame.sprite.Sprite 클래스를 상속받아 정의하였다. pygame.sprite.<span style="line-height: 1.5;">Sprite</span><span style="line-height: 1.5;">&nbsp;클래스는&nbsp;</span>pygame.sprite 모듈의 클래스로 게임 상의 오브젝트들을 나타내는 클래스이다. 이름으로도 대충 뭐하는 클래스인지 파악이 될 것이다. 이제 각 클래스의 역할이 뭔지? 멤버함수 또는 변수는 어떤게 있는지 살펴보자.</p>
+
+<p>&nbsp;</p>
+
+<h3><b>1. Farmer 클래스</b></h3>
+
+<p>말그대로 플레이어인 농부다. 초기화할 때 농부의 이미지를 불러오고 씨앗, 밀, 물, 코인 등을 얼마나 갖고 있는지 설정한다.</p>
+
+<p><img src="./4_files/cef6b41774365225c8aae3d2ec453ac8.png" alt="farmer_down.png" style="" rel="xe_gallery"> <img src="./4_files/8a1efeb5265e14884ef6d3a2b62fd7d1.png" alt="farmer_left.png" style="" rel="xe_gallery"> <img src="./4_files/35c34421af9d046de1085fc59a97798b.png" alt="farmer_right.png" style="" rel="xe_gallery"> <img src="./4_files/e317852c64905cbf76f1a95a44d0d9a3.png" alt="farmer_up.png" style="cursor: pointer;" rel="xe_gallery"></p>
+
+<p>&nbsp;</p>
+
+<h4>1.1. interact 함수</h4>
+
+<p>농부가 다른 오브젝트랑 상호작용할 때 작동한다.</p>
+
+<p>&nbsp;</p>
+
+<h4>1.2.&nbsp;move 함수</h4>
+
+<p>농부를 이동한다.&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h4>1.3.&nbsp;check_bounds 함수</h4>
+
+<p>농부가 경계를 넘었는지 조사한다.</p>
+
+<p>&nbsp;</p>
+
+<h3>2. Fence 클래스</h3>
+
+<p>농부가 이동할 수 있는 구역의 경계인 펜스를 나타낸다.</p>
+
+<p>&nbsp;</p>
+
+<h4>2.1&nbsp;assign_image 함수</h4>
+
+<p>펜스의 배열을 체크하여 펜스 이미지를 할당한다.</p>
+
+<p>&nbsp;</p>
+
+<h3>3.&nbsp;Plot 클래스</h3>
+
+<p>밀을 재배할 수 있는 땅을 나타낸다.</p>
+
+<p>&nbsp;</p>
+
+<h4>3.1. dry 함수</h4>
+
+<p>&nbsp;</p>
+
+<p>땅이 말라있다.</p>
+
+<p>&nbsp;</p>
+
+<h4>3.2. wet 함수</h4>
+
+<p>땅이 젖어있다.</p>
+
+<p>&nbsp;</p>
+
+<h4>3.3. update 함수</h4>
+
+<p>땅이 젖은 후 15초가 지나면 땅을 마르게 한다.</p>
+
+<p>&nbsp;</p>
+
+<h4>3.4. occupy 함수</h4>
+
+<p>씨앗을 심는 경우 호출</p>
+
+<p>&nbsp;</p>
+
+<h4>3.5. unoccupy 함수</h4>
+
+<p>밀을 재배한 경우 호출</p>
+
+<p>&nbsp;</p>
+
+<h3>4.&nbsp;Well 클래스</h3>
+
+<p>물을 얻을 수 있는 우물이다.</p>
+
+<p><img src="./4_files/f21f9dd92ac0e968984ebc97cd0a69b3.png" alt="well.png" style="" rel="xe_gallery"></p>
+
+<p>&nbsp;</p>
+
+<h3>5.&nbsp;WateringCan 클래스</h3>
+
+<p><span style="line-height: 1.5;">물을 담을 수 있는 물뿌리개이다.</span></p>
+
+<p><img src="./4_files/672bff589ac35d303faa2e9b8fd34e22.png" alt="watering_can_large.png" style="" rel="xe_gallery"></p>
+
+<p>&nbsp;</p>
+
+<h3>6.&nbsp;HUD_Sprite 클래스</h3>
+
+<p>게임 상태를 표시하는 HUD(Head-up Display)를 나타낸다.</p>
+
+<p>&nbsp;</p>
+
+<h3>7.&nbsp;Wheat_Plant 클래스</h3>
+
+<p>땅에 씨앗을 심는 경우 생성되는 오브젝트이다.</p>
+
+<p>&nbsp;</p>
+
+<p><img src="./4_files/e95f3192777d0d7b6480a1e858326677.png" alt="wheat_1.png" style="" rel="xe_gallery"> <img src="./4_files/73ef0b34b03a08e51a52802c113c963c.png" alt="wheat_2.png" style="" rel="xe_gallery"> <img src="./4_files/cfbbc29cc9d7d974b559b8d2d92b417a.png" alt="wheat_3.png" style="" rel="xe_gallery"> <img src="./4_files/56245d9b6b75c8ef240490ae3b001066.png" alt="wheat_4.png" style="" rel="xe_gallery"></p>
+
+<h4>7.1. get_growth_time 함수</h4>
+
+<p>다음 단계로 자라기 위한 시간을 계산한다. 5~10초 사이의 값을 리턴한다.</p>
+
+<p>&nbsp;</p>
+
+<h4>7.2. update 함수</h4>
+
+<p>시간을 체크하여&nbsp;growthtime이 지나면 다음 단계로 성장한다.</p>
+
+<p>&nbsp;</p>
+
+<h4>7.3. grow 함수</h4>
+
+<p>다음 단계로 성장시 호출</p>
+
+<p>&nbsp;</p>
+
+<h4>7.4. harvest 함수</h4>
+
+<p>다 자란 밀을 재배한다.</p>
+
+<p>&nbsp;</p>
+
+<h3>8.&nbsp;Shop 클래스</h3>
+
+<p>밀을 파고 씨앗을 살 수 있는 상점이다.</p>
+
+<p><img src="./4_files/f21f9dd92ac0e968984ebc97cd0a69b3.png" alt="well.png" style="" rel="xe_gallery"></p>
+
+<p>&nbsp;</p>
+
+<h4>8.1. open 함수</h4>
+
+<p>상점을 연다.</p>
+
+<p>&nbsp;</p>
+
+<h4>8.2. close 함수</h4>
+
+<p>상점을 닫는다.</p>
+
+<p>&nbsp;</p>
+
+<h4>8.3. update 함수</h4>
+
+<p>상점을 열었을 때의 메뉴 텍스트를 업데이트 한다.</p>
+
+<p>&nbsp;</p>
+
+<h4>8.4.&nbsp;up_selection 함수</h4>
+
+<p>위쪽 화살표를 누른 경우</p>
+
+<p>&nbsp;</p>
+
+<h4>8.5. down_selection 함수</h4>
+
+<p>아래쪽 화살표를 누른 경우</p>
+
+<p>&nbsp;</p>
+
+<h4>8.6.&nbsp;make_selection 함수</h4>
+
+<p>메뉴를 선택한 경우</p>
+
+<p>&nbsp;</p></div><!--AfterDocument(2677,4)--></article>
+			
+			</div>
+
+	
+	<div class="rd_ft">
+		
+	<div class="rd_sign clear">
+			<h4><em class="fa fa-info-circle bd_info_icon"></em> Who's <em>OBG</em></h4>
+	<img class="img fl" src="./4_files/4.jpg" alt="profile">			</div>		
+
+	<div class="bd_prev_next clear">
+	
+			<div>
+	<a class="bd_rd_prev bubble no_bubble fl" href="https://xe.obg.co.kr/programming/2692">
+	<span class="p"><em class="link"><i class="fa fa-angle-left"></i> Prev</em> [농장게임 만들기] 3. 배경을 그리자</span>					<i class="fa fa-angle-left"></i>
+					<span class="wrp prev_next">
+						<span class="speech">
+	<img src="./4_files/90x90.crop.jpg" alt="">							<b>[농장게임 만들기] 3. 배경을 그리자</b>
+							<span><em>2014.04.28</em><small>by </small>MoA</span>
+						</span><i class="edge"></i>
+						<i class="ie8_only bl"></i><i class="ie8_only br"></i>
+					</span>
+				</a>				
+		<a class="bd_rd_next bubble no_bubble fr" href="https://xe.obg.co.kr/programming/2674">
+	<span class="p">[농장게임 만들기] 1. Nubcake Farms 게임 소개 <em class="link">Next <i class="fa fa-angle-right"></i></em></span>					<i class="fa fa-angle-right"></i>
+					<span class="wrp prev_next">
+						<span class="speech">
+	<img src="./4_files/90x90(1).crop.jpg" alt="">							<b>[농장게임 만들기] 1. Nubcake Farms 게임 소개</b>
+							<span><em>2014.04.26</em><small>by </small>OBG</span>
+						</span><i class="edge"></i>
+						<i class="ie8_only bl"></i><i class="ie8_only br"></i>
+					</span>
+				</a>			</div>
+			</div>
+		
+	<div class="rd_vote">
+			<a class="bd_login" href="https://xe.obg.co.kr/programming/2677#" style="border:2px solid #333333;color:#333333;">
+				<b><i class="fa fa-heart"></i> 0</b>
+				<p>추천</p>
+			</a>
+	<a class="blamed bd_login" href="https://xe.obg.co.kr/programming/2677#">
+				<b><i class="fa fa-heart"></i> 0</b>
+				<p>비추천</p>
+			</a>			</div>		
+				
+	<div id="files_2677" class="rd_fnt rd_file hide" style="display: none;">
+<table class="bd_tb">
+	<caption class="blind">Atachment</caption>
+	<tbody><tr>
+		<th scope="row" class="ui_font"><strong>첨부</strong> <span class="fnt_count">'<b>11</b>'</span></th>
+		<td>
+	<ul>
+	<li><a class="bubble" href="https://xe.obg.co.kr/index.php?module=file&amp;act=procFileDownload&amp;file_srl=2681&amp;sid=0571e4a43d4102293dcf34581d681ef3" title="[File Size:880Bytes/Download:60]">farmer_down.png</a><span class="comma">,</span></li><li><a class="bubble" href="https://xe.obg.co.kr/index.php?module=file&amp;act=procFileDownload&amp;file_srl=2682&amp;sid=59d7d9797e74e5dcfd62745a7b6abdd5" title="[File Size:894Bytes/Download:60]">farmer_left.png</a><span class="comma">,</span></li><li><a class="bubble" href="https://xe.obg.co.kr/index.php?module=file&amp;act=procFileDownload&amp;file_srl=2683&amp;sid=ec44683e049d34bc9f62808938caf74f" title="[File Size:880Bytes/Download:60]">farmer_right.png</a><span class="comma">,</span></li><li><a class="bubble" href="https://xe.obg.co.kr/index.php?module=file&amp;act=procFileDownload&amp;file_srl=2684&amp;sid=c36af28e5226923231343e480df945e1" title="[File Size:823Bytes/Download:63]">farmer_up.png</a><span class="comma">,</span></li><li><a class="bubble" href="https://xe.obg.co.kr/index.php?module=file&amp;act=procFileDownload&amp;file_srl=2685&amp;sid=442b9774673b5ea9ea2d6ad15547e11b" title="[File Size:1.1KB/Download:50]">shop.png</a><span class="comma">,</span></li><li><a class="bubble" href="https://xe.obg.co.kr/index.php?module=file&amp;act=procFileDownload&amp;file_srl=2686&amp;sid=00d5ac0397130717e033b1ce06953563" title="[File Size:1.1KB/Download:58]">well.png</a><span class="comma">,</span></li><li><a class="bubble" href="https://xe.obg.co.kr/index.php?module=file&amp;act=procFileDownload&amp;file_srl=2687&amp;sid=81cb0d30017e72d4865cb8ccebe1b91e" title="[File Size:1.1KB/Download:58]">wheat_1.png</a><span class="comma">,</span></li><li><a class="bubble" href="https://xe.obg.co.kr/index.php?module=file&amp;act=procFileDownload&amp;file_srl=2688&amp;sid=7190682c04182c5b86cb1de7c8075db0" title="[File Size:3.1KB/Download:61]">wheat_2.png</a><span class="comma">,</span></li><li><a class="bubble" href="https://xe.obg.co.kr/index.php?module=file&amp;act=procFileDownload&amp;file_srl=2689&amp;sid=fe8022d10c0823197579f9d408562b1a" title="[File Size:2.9KB/Download:58]">wheat_3.png</a><span class="comma">,</span></li><li><a class="bubble" href="https://xe.obg.co.kr/index.php?module=file&amp;act=procFileDownload&amp;file_srl=2690&amp;sid=0769b29d4ba87aab9296510cc7037d0c" title="[File Size:4.1KB/Download:49]">wheat_4.png</a><span class="comma">,</span></li><li><a class="bubble" href="https://xe.obg.co.kr/index.php?module=file&amp;act=procFileDownload&amp;file_srl=2691&amp;sid=1b85be6804a12548728491aca7d750ea" title="[File Size:1.1KB/Download:71]">watering_can_large.png</a><span class="comma">,</span></li>			</ul>			</td>
+	</tr>
+</tbody></table>
+</div>
+		
+		<div class="rd_ft_nav clear">
+				
+	<div class="rd_nav img_tx to_sns fl" data-url="https://xe.obg.co.kr/programming/2677?l=ko" data-title="%5B%EB%86%8D%EC%9E%A5%EA%B2%8C%EC%9E%84+%EB%A7%8C%EB%93%A4%EA%B8%B0%5D+2.+Nubcake+Farms+%ED%81%B4%EB%9E%98%EC%8A%A4+%EB%B6%84%EC%84%9D">
+	<a class="" href="https://xe.obg.co.kr/programming/2677#" data-type="facebook" title="To Facebook"><i class="ico_sns16 facebook"></i><strong> Facebook</strong></a>
+	<a class="" href="https://xe.obg.co.kr/programming/2677#" data-type="twitter" title="To Twitter"><i class="ico_sns16 twitter"></i><strong> Twitter</strong></a>
+	<a class="" href="https://xe.obg.co.kr/programming/2677#" data-type="google" title="To Google"><i class="ico_sns16 google"></i><strong> Google</strong></a>
+	<a class="" href="https://xe.obg.co.kr/programming/2677#" data-type="pinterest" title="To Pinterest"><i class="ico_sns16 pinterest"></i><strong> Pinterest</strong></a>
+</div>
+
+
+		
+				
+		<div class="rd_nav img_tx fr m_btn_wrp">
+				<a class="back_to bubble m_no" href="https://xe.obg.co.kr/programming/2677#bd_1178_2677" title="위로"><i class="fa fa-arrow-up"></i><b class="tx">위로</b></a>
+	<a class="back_to bubble m_no" href="https://xe.obg.co.kr/programming/2677#rd_end_2677" title="(목록) 아래로"><i class="fa fa-arrow-down"></i><b class="tx">아래로</b></a>
+	<a class="comment back_to bubble if_viewer m_no" href="https://xe.obg.co.kr/programming/2677#2677_comment" title="댓글로 가기"><i class="fa fa-comment"></i><b class="tx">댓글로 가기</b></a>
+	<a class="print_doc bubble m_no" href="https://xe.obg.co.kr/programming/2677?listStyle=viewer" title="인쇄"><i class="fa fa-print"></i><b class="tx">인쇄</b></a>	<a class="file back_to bubble m_no" href="https://xe.obg.co.kr/programming/2677#files_2677" onclick="jQuery(&#39;#files_2677&#39;).show();return false" title="첨부"><i class="fa fa-paperclip"></i><b class="tx">첨부</b></a>		</div>
+			</div>
+	</div>
+
+	
+	<div class="fdb_lst_wrp  ">
+		<div id="2677_comment" class="fdb_lst clear  ">
+			
+				
+	<div class="cmt_editor">
+
+<label for="editor_2677" class="cmt_editor_tl fl"><em>✔</em><strong>댓글 쓰기</strong></label>
+
+<div class="editor_select bubble fr m_no" title="※ 주의 : 페이지가 새로고침됩니다">
+	<a class="tg_btn2" href="https://xe.obg.co.kr/programming/2677#" data-href="#editor_select"><em class="fa fa-info-circle bd_info_icon"></em> 에디터 선택하기</a>
+	<div id="editor_select" class="tg_cnt2 wrp m_no"><button type="button" class="tg_blur2"></button>
+		<a class="on" href="https://xe.obg.co.kr/programming/2677#" onclick="jQuery.cookie(&#39;bd_editor&#39;,&#39;simple&#39;);location.reload();return false"><em>✔ </em>텍스트 모드</a>
+		<a href="https://xe.obg.co.kr/programming/2677#" onclick="jQuery.cookie(&#39;bd_editor&#39;,&#39;editor&#39;);location.reload();return false"><em>✔ </em>에디터 모드</a>
+			<span class="edge"></span><button type="button" class="tg_blur2"></button>
+		<i class="ie8_only bl"></i><i class="ie8_only br"></i>
+	</div></div>
+<form action="https://xe.obg.co.kr/" method="post" onsubmit="return procFilter(this, insert_comment)" class="bd_wrt cmt_wrt clear" editor_sequence="2677"><input type="hidden" name="error_return_url" value="/programming/2677"><input type="hidden" name="act" value="">
+	<input type="hidden" name="mid" value="programming">
+	<input type="hidden" name="document_srl" value="2677">
+	<input type="hidden" name="comment_srl" value="">
+	<input type="hidden" name="content" value="">
+		<div class="simple_wrt">
+		<span class="profile img no_img">?</span>		<div class="text">
+			<input type="hidden" name="use_html" value="Y">
+			<input type="hidden" id="htm_2677" value="n">
+			<textarea id="editor_2677" cols="50" rows="4" style="overflow: hidden; min-height: 4em; height: 46px; width: 100%;"></textarea><div class="autogrow-textarea-mirror" style="display: none; overflow-wrap: break-word; padding: 4px 6px; width: 716px; font-family: &quot;Open Sans&quot;, NanumBarunGothic, &quot;Malgun Gothic&quot;, Dotum, &quot;Apple SD Gothic Neo&quot;, AppleGothic, Helvetica, sans-serif; font-size: 12px; line-height: 18px;">.<br>.</div>
+		</div>
+		<input type="submit" value="등록" class="bd_btn">
+	</div>	<div class="edit_opt clear" style="display:none">
+			<span class="itx_wrp">
+			<label for="nick_name_2677">글쓴이</label>
+			<input type="text" name="nick_name" id="nick_name_2677" class="itx n_p">
+		</span>
+		<span class="itx_wrp">
+			<label for="password_2677">비밀번호</label>
+			<input type="password" name="password" id="password_2677" class="itx n_p">
+		</span>
+		<span class="itx_wrp">
+			<label for="email_address_2677">이메일 주소</label>
+			<input type="text" name="email_address" id="email_address_2677" class="itx m_h">
+		</span>
+		<span class="itx_wrp">
+			<label for="homepage_2677">홈페이지</label>
+			<input type="text" name="homepage" id="homepage_2677" class="itx m_h">
+		</span>
+				<div class="opt_chk">
+					<input type="checkbox" name="is_secret" value="Y" id="is_secret_2677">
+			<label for="is_secret_2677">비밀글 기능</label>
+			</div>
+	</div>
+<input type="hidden" name="_rx_csrf_token" value="ud7YCPfmnFIH0S2B"></form>
+
+
+<div id="re_cmt">
+	<label for="editor_2" class="cmt_editor_tl fl"><i class="fa fa-share fa-flip-vertical re"></i><strong>댓글 쓰기</strong></label>
+	<div class="editor_select fr">
+		<a class="wysiwyg m_no" href="https://xe.obg.co.kr/programming/2677#"><em class="fa fa-info-circle bd_info_icon"></em> 에디터 사용하기</a>
+		<a class="close" href="https://xe.obg.co.kr/programming/2677#" onclick="jQuery(&#39;#re_cmt&#39;).fadeOut().parent().find(&#39;.re_comment&#39;).focus();return false"><i class="fa fa-times"></i> 닫기</a>
+	</div>
+	<form action="https://xe.obg.co.kr/" method="post" onsubmit="return procFilter(this,insert_comment)" class="bd_wrt clear" editor_sequence="2"><input type="hidden" name="error_return_url" value="/programming/2677"><input type="hidden" name="act" value="">
+		<input type="hidden" name="mid" value="programming">
+		<input type="hidden" name="document_srl" value="2677">
+		<input type="hidden" name="content" value="">
+		<input type="hidden" name="parent_srl" value="">
+		<input type="hidden" name="use_html" value="Y">
+		<div class="simple_wrt">
+			<input type="hidden" id="htm_2" value="n">
+			<textarea id="editor_2" cols="50" rows="8" style="overflow: hidden; min-height: 8em; height: 10px; width: 100%;"></textarea><div class="autogrow-textarea-mirror" style="display: none; overflow-wrap: break-word; padding: 4px 6px; width: 100%; font-family: &quot;Open Sans&quot;, NanumBarunGothic, &quot;Malgun Gothic&quot;, Dotum, &quot;Apple SD Gothic Neo&quot;, AppleGothic, Helvetica, sans-serif; font-size: 12px; line-height: 18px;">.<br>.</div>
+		</div>
+		<div class="edit_opt">
+				<span class="itx_wrp">
+				<label for="nick_name">글쓴이</label>
+				<input type="text" name="nick_name" id="nick_name" class="itx n_p">
+			</span>
+			<span class="itx_wrp">
+				<label for="password">비밀번호</label>
+				<input type="password" name="password" id="password" class="itx n_p">
+			</span>	
+			<span class="itx_wrp">
+				<label for="email_address">이메일 주소</label>
+				<input type="text" name="email_address" id="email_address" class="itx m_h">
+			</span>	
+			<span class="itx_wrp">
+				<label for="homepage">홈페이지</label>
+				<input type="text" name="homepage" id="homepage" class="itx m_h">
+			</span>
+	            <input type="submit" value="등록" class="bd_btn fr">
+		</div>
+		<span class="opt_chk">
+						<input type="checkbox" name="is_secret" value="Y" id="is_secret">
+				<label for="is_secret">비밀글 기능</label>
+			</span>
+	<input type="hidden" name="_rx_csrf_token" value="ud7YCPfmnFIH0S2B"></form>
+</div>
+
+</div>
+			
+			<div id="cmtPosition" aria-live="polite">
+
+<div class="fdb_tag">
+	<a class="ui_font bubble" href="https://xe.obg.co.kr/programming/2677#" onclick="jQuery(this).parent().nextAll(&#39;ul,.bd_pg&#39;).slideToggle();return false" title="댓글 보기">Comments <b>'3'</b></a>
+</div>
+<ul class="fdb_lst_ul ">
+		<li id="comment_2678" class="fdb_itm clear">
+		
+			<span class="profile img no_img">?</span>			
+		<div class="meta">
+			<b>큰돼지</b>			<span class="date">2014.04.28 12:55</span>
+					
+			</div>
+		
+		<!--BeforeComment(2678,0)--><div class="comment_2678_0 rhymix_content xe_content">재밌다능</div><!--AfterComment(2678,0)-->			
+		<div class="fdb_nav img_tx">
+						<a href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispBoardModifyComment&amp;comment_srl=2678"><i class="fa fa-pencil"></i>수정</a>
+			<a href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispBoardDeleteComment&amp;comment_srl=2678"><i class="fa fa-eraser"></i>삭제</a>
+		<a class="re_comment" href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispBoardReplyComment&amp;comment_srl=2678" onclick="reComment(2677,2678,&#39;/index.php?mid=programming&amp;document_srl=2677&amp;act=dispBoardReplyComment&amp;comment_srl=2678&#39;);return false;"><i class="fa fa-comment"></i> 댓글</a>			
+			</div>
+	</li>
+		<li id="comment_2679" class="fdb_itm clear">
+		
+			<span class="profile img no_img">?</span>			
+		<div class="meta">
+			<b>큰돼지</b>			<span class="date">2014.04.28 12:58</span>
+					
+			</div>
+		
+		<!--BeforeComment(2679,0)--><div class="comment_2679_0 rhymix_content xe_content">다음강좌도 올려줘요 현기증 난단말에요</div><!--AfterComment(2679,0)-->			
+		<div class="fdb_nav img_tx">
+						<a href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispBoardModifyComment&amp;comment_srl=2679"><i class="fa fa-pencil"></i>수정</a>
+			<a href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispBoardDeleteComment&amp;comment_srl=2679"><i class="fa fa-eraser"></i>삭제</a>
+		<a class="re_comment" href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispBoardReplyComment&amp;comment_srl=2679" onclick="reComment(2677,2679,&#39;/index.php?mid=programming&amp;document_srl=2677&amp;act=dispBoardReplyComment&amp;comment_srl=2679&#39;);return false;"><i class="fa fa-comment"></i> 댓글</a>			
+			</div>
+	</li>
+		<li id="comment_2680" class="fdb_itm clear">
+		
+			<span class="profile img no_img">?</span>			
+		<div class="meta">
+			<b>큰돼지</b>			<span class="date">2014.04.29 14:47</span>
+					
+			</div>
+		
+		<!--BeforeComment(2680,0)--><div class="comment_2680_0 rhymix_content xe_content">클래스 도표 그리는것도 이참에 배워도야겠네여</div><!--AfterComment(2680,0)-->			
+		<div class="fdb_nav img_tx">
+						<a href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispBoardModifyComment&amp;comment_srl=2680"><i class="fa fa-pencil"></i>수정</a>
+			<a href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispBoardDeleteComment&amp;comment_srl=2680"><i class="fa fa-eraser"></i>삭제</a>
+		<a class="re_comment" href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispBoardReplyComment&amp;comment_srl=2680" onclick="reComment(2677,2680,&#39;/index.php?mid=programming&amp;document_srl=2677&amp;act=dispBoardReplyComment&amp;comment_srl=2680&#39;);return false;"><i class="fa fa-comment"></i> 댓글</a>			
+			</div>
+	</li>
+	</ul>
+
+
+
+</div>
+			
+				</div>
+	</div>	
+	</div>
+
+
+
+<hr id="rd_end_2677" class="rd_end clear">
+
+
+<div class="bd_lst_wrp">
+
+<div class="tl_srch clear">
+	
+			
+	<div class="bd_faq_srch">
+	<form action="https://xe.obg.co.kr/" method="get" onsubmit="return procFilter(this, search)"><input type="hidden" name="act" value="">
+	<input type="hidden" name="vid" value="">
+	<input type="hidden" name="mid" value="programming">
+	<input type="hidden" name="category" value="">
+	<table class="bd_tb">
+		<tbody><tr>
+			<td>
+				<span class="select itx">
+					<select name="search_target">
+	<option value="title_content">제목+내용</option><option value="title">제목</option><option value="content">내용</option><option value="comment">댓글</option><option value="user_name">이름</option><option value="nick_name">닉네임</option><option value="user_id">아이디</option><option value="tag">태그</option>					</select>
+				</span>
+			</td>
+			<td class="itx_wrp">
+				<input type="text" name="search_keyword" value="" class="itx srch_itx">
+			</td>
+			<td>
+				<button type="submit" onclick="jQuery(this).parents(&#39;form&#39;).submit();return false" class="bd_btn">검색</button>
+				</td>
+		</tr>
+	</tbody></table>
+</form>
+	</div></div>
+
+
+<div class="cnb_n_list">
+<div>
+																																																	<div class="bd_cnb clear css3pie">
+		<a class="home" href="https://xe.obg.co.kr/programming" title="글 수 &#39;287&#39;"><i class="home ico_16px">Category</i></a>
+		<div class="dummy_ie fr"></div>
+		<ul class="bubble bg_f_f9 css3pie" style="overflow: visible;">
+			<li class="cnbMore" style="visibility: visible;"><a href="https://xe.obg.co.kr/programming/2677#" class="bubble" title="분류 더보기"><i class="fa fa-caret-down"></i></a></li>
+	<li>
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/4416" title="글 수 21" style="color:">Deeplearning</a>
+				</li><li>
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/4827" title="글 수 15" style="color:">LLM</a>
+				</li><li>
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/2436" title="글 수 27" style="color:">C/C++</a>
+				</li><li>
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/2437" title="글 수 10" style="color:">Library</a>
+				</li><li>
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/2438" title="글 수 3" style="color:">STL/Boost</a>
+				</li><li>
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/2439" title="글 수 75" style="color:">API/MFC</a>
+				</li><li>
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/2440" title="글 수 11" style="color:">JAVA/Android</a>
+				</li><li>
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/2441" title="글 수 43" style="color:">Python</a>
+				</li><li>
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/2442" title="글 수 3" style="color:">Database</a>
+				</li><li>
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/2443" title="글 수 6" style="color:">Web</a>
+				</li><li class="cnb_hide">
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/2444" title="글 수 4" style="color:">Algorithm</a>
+				</li><li class="cnb_hide">
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/2445" title="글 수 2" style="color:">Reversing</a>
+				</li><li class="cnb_hide">
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/2446" title="글 수 4" style="color:">Graphic</a>
+				</li><li class="cnb_hide">
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/4533" title="글 수 9" style="color:">서버</a>
+				</li><li class="cnb_hide">
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/2447" title="글 수 22" style="color:">Site</a>
+				</li><li class="cnb_hide">
+				<a class="a1" href="https://xe.obg.co.kr/programming/category/2448" title="글 수 33" style="color:">Tool/etc</a>
+				</li>		</ul>
+	</div>		</div>
+
+<div class="lst_btn fr">
+	<ul>
+		<li class="classic on"><a class="bubble" href="https://xe.obg.co.kr/programming?listStyle=list" title="Text Style"><b>List</b></a></li>
+		<li class="zine"><a class="bubble" href="https://xe.obg.co.kr/programming?listStyle=webzine" title="Text + Image Style"><b>Zine</b></a></li>
+		<li class="gall"><a class="bubble" href="https://xe.obg.co.kr/programming?listStyle=gallery" title="Gallery Style"><b>Gallery</b></a></li>
+		</ul>
+</div></div>
+
+
+		
+<table class="bd_lst bd_tb_lst bd_tb">
+	<caption class="blind">List of Articles</caption>
+	<thead class="bg_f_f9">
+		
+		<tr>
+		<th scope="col" class="no"><span><a href="https://xe.obg.co.kr/programming/2677?order_type=desc" title="내림차순">번호</a></span></th>														<th scope="col" class="m_no"><span>분류</span></th>			<th scope="col" class="title"><span><a href="https://xe.obg.co.kr/programming/2677?sort_index=title&amp;order_type=desc">제목</a></span></th>
+														<th scope="col"><span>글쓴이</span></th>															<th scope="col"><span><a href="https://xe.obg.co.kr/programming/2677?sort_index=regdate&amp;order_type=desc">날짜</a></span></th>															<th scope="col" class="m_no"><span><a href="https://xe.obg.co.kr/programming/2677?sort_index=readed_count&amp;order_type=desc">조회 수</a></span></th>						</tr>
+	</thead>
+	<tbody>
+		
+	<tr class="notice">
+		<td class="no">
+	<strong>공지</strong>			</td>														<td class="cate" style="color:"><strong>Tool/etc</strong></td>			<td class="title">
+				<a href="https://xe.obg.co.kr/programming/2751"><strong>Programming 게시판 관련</strong></a>
+		<a href="https://xe.obg.co.kr/programming/2751#2751_comment" class="replyNum" title="댓글">2</a>						<span class="extraimages"></span>
+			</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time">2014.11.01</td>															<td class="m_no">1978</td>						</tr>		
+	<tr>
+		<td class="no">
+		207			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2748" class="hx" data-viewer="/programming/2748?listStyle=viewer">
+	[액션게임 만들기] 8. 캐릭터 액션 구현 1				</a>
+									<span class="extraimages"></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="14:00">2014.05.07</td>															<td class="m_no">525</td>						</tr><tr>
+		<td class="no">
+		206			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2747" class="hx" data-viewer="/programming/2747?listStyle=viewer">
+	[액션게임 만들기] 7. 캐릭터 출력				</a>
+									<span class="extraimages"></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="13:57">2014.05.07</td>															<td class="m_no">497</td>						</tr><tr>
+		<td class="no">
+		205			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2746" class="hx" data-viewer="/programming/2746?listStyle=viewer">
+	[액션게임 만들기] 6. 게임 화면 출력				</a>
+									<span class="extraimages"></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="13:54">2014.05.07</td>															<td class="m_no">463</td>						</tr><tr>
+		<td class="no">
+		204			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2745" class="hx" data-viewer="/programming/2745?listStyle=viewer">
+	[액션게임 만들기] 5. 장면 전환				</a>
+									<span class="extraimages"></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="13:47">2014.05.07</td>															<td class="m_no">482</td>						</tr><tr>
+		<td class="no">
+		203			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2742" class="hx" data-viewer="/programming/2742?listStyle=viewer">
+	[액션게임 만들기] 4. 캐릭터 선택 화면				</a>
+									<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">OBG</a></span></td>															<td class="time" title="13:39">2014.05.07</td>															<td class="m_no">702</td>						</tr><tr>
+		<td class="no">
+		202			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2738" class="hx" data-viewer="/programming/2738?listStyle=viewer">
+	[액션게임 만들기] 3. 클래스 다이어그램 기초				</a>
+									<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">OBG</a></span></td>															<td class="time" title="13:31">2014.05.07</td>															<td class="m_no">2811</td>						</tr><tr>
+		<td class="no">
+		201			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2735" class="hx" data-viewer="/programming/2735?listStyle=viewer">
+	[액션게임 만들기] 2. 클래스 분석				</a>
+									<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">OBG</a></span></td>															<td class="time" title="03:20">2014.05.06</td>															<td class="m_no">1012</td>						</tr><tr>
+		<td class="no">
+		200			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2730" class="hx" data-viewer="/programming/2730?listStyle=viewer">
+	[액션게임 만들기] 1. Street Pyghter 게임 소개				</a>
+			<a href="https://xe.obg.co.kr/programming/2730#2730_comment" class="replyNum" title="댓글">3</a>						<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">OBG</a></span></td>															<td class="time" title="03:08">2014.05.03</td>															<td class="m_no">913</td>						</tr><tr>
+		<td class="no">
+		199			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2727" class="hx" data-viewer="/programming/2727?listStyle=viewer">
+	[농장게임 만들기] 10. 상점을 추가하자				</a>
+									<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="18:52">2014.05.01</td>															<td class="m_no">2692</td>						</tr><tr>
+		<td class="no">
+		198			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2724" class="hx" data-viewer="/programming/2724?listStyle=viewer">
+	[농장게임 만들기] 9. 밀을 재배하자				</a>
+									<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="18:31">2014.05.01</td>															<td class="m_no">667</td>						</tr><tr>
+		<td class="no">
+		197			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2721" class="hx" data-viewer="/programming/2721?listStyle=viewer">
+	[농장게임 만들기] 8. HUD에 텍스트를 표시하자				</a>
+									<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="18:20">2014.05.01</td>															<td class="m_no">696</td>						</tr><tr>
+		<td class="no">
+		196			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2717" class="hx" data-viewer="/programming/2717?listStyle=viewer">
+	[농장게임 만들기] 7. 농부 행동 추가				</a>
+			<a href="https://xe.obg.co.kr/programming/2717#2717_comment" class="replyNum" title="댓글">1</a>						<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="18:09">2014.05.01</td>															<td class="m_no">549</td>						</tr><tr>
+		<td class="no">
+		195			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2713" class="hx" data-viewer="/programming/2713?listStyle=viewer">
+	[농장게임 만들기] 6. 나머지 오브젝트를 그리자				</a>
+			<a href="https://xe.obg.co.kr/programming/2713#2713_comment" class="replyNum" title="댓글">1</a>						<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="18:00">2014.05.01</td>															<td class="m_no">794</td>						</tr><tr>
+		<td class="no">
+		194			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2709" class="hx" data-viewer="/programming/2709?listStyle=viewer">
+	[농장게임 만들기] 5. 플레이어를 추가하자				</a>
+			<a href="https://xe.obg.co.kr/programming/2709#2709_comment" class="replyNum" title="댓글">1</a>						<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="04:19">2014.04.30</td>															<td class="m_no">550</td>						</tr><tr>
+		<td class="no">
+		193			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2701" class="hx" data-viewer="/programming/2701?listStyle=viewer">
+	[농장게임 만들기] 4. 펜스를 그리자				</a>
+			<a href="https://xe.obg.co.kr/programming/2701#2701_comment" class="replyNum" title="댓글">5</a>						<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="03:17">2014.04.30</td>															<td class="m_no">624</td>						</tr><tr>
+		<td class="no">
+		192			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2692" class="hx" data-viewer="/programming/2692?listStyle=viewer">
+	[농장게임 만들기] 3. 배경을 그리자				</a>
+			<a href="https://xe.obg.co.kr/programming/2692#2692_comment" class="replyNum" title="댓글">6</a>						<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="18:03">2014.04.28</td>															<td class="m_no">2098</td>						</tr><tr class="select">
+		<td class="no">
+	»				</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2677" class="hx" data-viewer="/programming/2677?listStyle=viewer">
+	[농장게임 만들기] 2. Nubcake Farms 클래스 분석				</a>
+			<a href="https://xe.obg.co.kr/programming/2677#2677_comment" class="replyNum" title="댓글">3</a>						<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">OBG</a></span></td>															<td class="time" title="22:10">2014.04.26</td>															<td class="m_no">738</td>						</tr><tr>
+		<td class="no">
+		190			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2674" class="hx" data-viewer="/programming/2674?listStyle=viewer">
+	[농장게임 만들기] 1. Nubcake Farms 게임 소개				</a>
+			<a href="https://xe.obg.co.kr/programming/2674#2674_comment" class="replyNum" title="댓글">4</a>						<span class="extraimages"><img src="./4_files/file.gif" alt="file" title="file" style="margin-right:2px;"><i class="attached_image" title="Image"></i></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">OBG</a></span></td>															<td class="time" title="02:00">2014.04.26</td>															<td class="m_no">1630</td>						</tr><tr>
+		<td class="no">
+		189			</td>														<td class="cate"><span style="color:">Python</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2671" class="hx" data-viewer="/programming/2671?listStyle=viewer">
+	[게임 만들기] 강좌 진행 예정				</a>
+			<a href="https://xe.obg.co.kr/programming/2671#2671_comment" class="replyNum" title="댓글">2</a>						<span class="extraimages"></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="01:16">2014.04.26</td>															<td class="m_no">1480</td>						</tr><tr>
+		<td class="no">
+		188			</td>														<td class="cate"><span style="color:">Algorithm</span></td>			<td class="title">
+				
+					<a href="https://xe.obg.co.kr/programming/2670" class="hx" data-viewer="/programming/2670?listStyle=viewer">
+	2048게임 높은 점수 얻기 위한 알고리즘				</a>
+									<span class="extraimages"></span>
+				</td>
+														<td class="author"><span><a href="https://xe.obg.co.kr/programming/2677#popup_menu_area" class="member_4" onclick="return false">MoA</a></span></td>															<td class="time" title="21:08">2014.03.29</td>															<td class="m_no">575</td>						</tr>	</tbody>
+</table>	
+
+<div class="btm_mn clear">
+	
+		<div class="fl">
+			
+	<form action="https://xe.obg.co.kr/" method="get" onsubmit="return procFilter(this, search)" class="bd_srch_btm"><input type="hidden" name="act" value="">
+			<input type="hidden" name="vid" value="">
+			<input type="hidden" name="mid" value="programming">
+			<input type="hidden" name="category" value="">
+			<span class="btn_img itx_wrp">
+				<button type="submit" onclick="jQuery(this).parents(&#39;form.bd_srch_btm&#39;).submit();return false;" class="ico_16px search">Search</button>
+				<label for="bd_srch_btm_itx_1178">검색</label>
+				<input type="text" name="search_keyword" id="bd_srch_btm_itx_1178" class="bd_srch_btm_itx srch_itx" value="">
+			</span>
+			<span class="btn_img select">
+				<select name="search_target">
+	<option value="title_content">제목+내용</option><option value="title">제목</option><option value="content">내용</option><option value="comment">댓글</option><option value="user_name">이름</option><option value="nick_name">닉네임</option><option value="user_id">아이디</option><option value="tag">태그</option>				</select>
+			</span>
+			</form>	</div>
+	<div class="fr">
+		<a class="btn_img" href="https://xe.obg.co.kr/index.php?mid=programming&amp;act=dispBoardWrite"><i class="ico_16px write"></i> 쓰기</a>		</div>
+</div>
+
+<form action="https://xe.obg.co.kr/" method="get" class="bd_pg clear"><input type="hidden" name="error_return_url" value="/programming/2677"><input type="hidden" name="act" value="">
+	<fieldset>
+	<legend class="blind">Board Pagination</legend>
+	<input type="hidden" name="vid" value="">
+	<input type="hidden" name="mid" value="programming">
+	<input type="hidden" name="category" value="">
+	<input type="hidden" name="search_keyword" value="">
+	<input type="hidden" name="search_target" value="">
+	<input type="hidden" name="listStyle" value="list">
+			<a href="https://xe.obg.co.kr/programming?page=4" class="direction"><i class="fa fa-angle-left"></i> Prev</a>		<a class="frst_last bubble" href="https://xe.obg.co.kr/programming" title="첫 페이지">1</a>
+	<span class="bubble"><a href="https://xe.obg.co.kr/programming/2677#" class="tg_btn2" data-href=".bd_go_page" title="go_page">...</a></span>		 
+	<a href="https://xe.obg.co.kr/programming?page=2">2</a>		 
+	<a href="https://xe.obg.co.kr/programming?page=3">3</a>		 
+	<a href="https://xe.obg.co.kr/programming?page=4">4</a>		<strong class="this">5</strong> 
+			 
+	<a href="https://xe.obg.co.kr/programming?page=6">6</a>		 
+	<a href="https://xe.obg.co.kr/programming?page=7">7</a>		 
+	<a href="https://xe.obg.co.kr/programming?page=8">8</a>		 
+	<a href="https://xe.obg.co.kr/programming?page=9">9</a>		 
+	<a href="https://xe.obg.co.kr/programming?page=10">10</a>		<span class="bubble"><a href="https://xe.obg.co.kr/programming/2677#" class="tg_btn2" data-href=".bd_go_page" title="페이지 직접 이동">...</a></span>	<a class="frst_last bubble" href="https://xe.obg.co.kr/programming?page=15" title="끝 페이지">15</a>	<a href="https://xe.obg.co.kr/programming?page=6" class="direction">Next <i class="fa fa-angle-right"></i></a>		<div class="bd_go_page tg_cnt2 wrp">
+		<button type="button" class="tg_blur2"></button>
+		<input type="text" name="page" class="itx">/ 15 <button type="submit" class="bd_btn">GO</button>
+		<span class="edge"></span>
+		<i class="ie8_only bl"></i><i class="ie8_only br"></i>
+		<button type="button" class="tg_blur2"></button>
+	</div>
+	</fieldset>
+</form>
+
+
+</div>
+</div>
+
+			</div>
+			<!-- /CONTENT -->
+	</div>
+	<!-- END:BODY -->
+
+	<footer class="footer" style="border-bottom-color:#CDA25A">
+		<div class="f_info_area">
+			<div class="f_info">
+						<p class="f_logo log_txt">
+						<a href="https://xe.obg.co.kr/programming/2677#">
+									</a>
+					</p>
+					<p class="sub_desc"></p>
+				</div>
+			<div class="f_info2">
+				<div class="site_map">
+	<ul>
+		<li>
+								<a href="https://xe.obg.co.kr/freeboard">게시판</a>
+	<ul>
+	<li>
+									<a href="https://xe.obg.co.kr/freeboard">자유게시판</a>
+								</li><li>
+									<a href="https://xe.obg.co.kr/infoboard">정보게시판</a>
+								</li><li>
+									<a href="https://xe.obg.co.kr/programming">Programming</a>
+								</li>							</ul>						</li><li>
+								<a href="https://xe.obg.co.kr/picture">사진첩</a>
+							</li><li>
+								<a href="https://xe.obg.co.kr/mediascrap">스크랩</a>
+	<ul>
+	<li>
+									<a href="https://xe.obg.co.kr/mediascrap">미디어스크랩</a>
+								</li><li>
+									<a href="https://xe.obg.co.kr/linkscrap">링크스크랩</a>
+								</li><li>
+									<a href="https://xe.obg.co.kr/jjalbang">짤방</a>
+								</li>							</ul>						</li><li class="clear">
+								<a href="https://xe.obg.co.kr/server_log">한줄메모</a>
+	<ul>
+	<li>
+									<a href="https://xe.obg.co.kr/server_log">서버 관리 기록</a>
+								</li>							</ul>						</li>					</ul>				</div>
+			</div>
+		</div>
+		<div class="f_cr_area">
+			<p class="copyright">
+						</p>
+			<ul class="mobile-footer-member">
+					<li><a href="https://xe.obg.co.kr/index.php?mid=programming&amp;act=dispMemberLoginForm">로그인</a></li>
+				<li><a href="https://xe.obg.co.kr/index.php?mid=programming&amp;act=dispMemberSignUpForm">회원가입</a></li>
+				</ul>
+		</div>
+	</footer>
+</div>
+<!-- TOP -->
+<a href="https://xe.obg.co.kr/programming/2677#" class="btn_top" style="display: inline;"><i class="xi-angle-up"><span class="blind">위로</span></i></a>
+<!-- /TOP -->
+<!-- Ncenter login widget -->
+	<div class="xe-widget-wrapper " style=""><div style="padding:0px 0px 0px 0px !important;">
+<div id="nc_container" class="nc_login">
+	<ul class="nc_memu guest">
+		<li class="nc_profile fLeft">
+		<img src="./4_files/p.png" alt="my profile" class="nc_profile_img">				<strong>손님</strong>
+		</li>
+
+		<li class="fLeft">
+			<a class="notify" href="https://xe.obg.co.kr/programming/2677#">
+				로그인해주세요!
+			</a>
+		</li>
+	</ul>
+
+	<div class="list">
+	<form id="account-signup" action="https://xe.obg.co.kr/index.php?act=procMemberLogin" method="post" class="account"><input type="hidden" name="error_return_url" value="/programming/2677"><input type="hidden" name="mid" value="programming"><input type="hidden" name="ruleset" value="@login">
+			<fieldset id="acField">
+				<input type="hidden" name="act" value="procMemberLogin">
+				<input type="hidden" name="success_return_url" value="/programming/2677">
+				<input type="hidden" name="xe_validator_id" value="widgets/login_info/skins/default/login_form/1">
+					<h2><i class="xi-user"></i>로그인</h2>
+				<button class="submit"><i class="xi-user-check"></i></button>
+				<span class="inputUserIcon"><i class="xi-user"></i></span>
+	<input name="user_id" id="user_id" type="text" class="user" placeholder="아이디" required="">					<span class="inputPassIcon"><i class="xi-key"></i></span>
+				<input name="password" id="user_pw" type="password" class="pass" required="" placeholder="비밀번호">
+				<p class="keep">
+					<input type="checkbox" name="keep_signed" id="keep_signed" value="Y">
+					<label for="keep_signed">로그인 유지</label>
+				</p>
+				<ul class="help">
+					<li><a href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispMemberSignUpForm">회원가입</a></li>
+					<li><a href="https://xe.obg.co.kr/index.php?mid=programming&amp;document_srl=2677&amp;act=dispMemberFindAccount">ID/PW 찾기</a></li>
+				</ul>
+			</fieldset>
+		<input type="hidden" name="_rx_csrf_token" value="ud7YCPfmnFIH0S2B"></form>
+	</div>
+</div>
+</div></div>
+<!-- Login widget -->
+<section class="login_widget" style="display:none">
+		<div class="ly_dimmed"></div>
+	<div class="signin">
+		<div class="login-header">
+			<h1>LOGIN</h1>
+		</div>
+		<div class="login-body">
+			<form action="https://xe.obg.co.kr/index.php?act=procMemberLogin" class="rx_ajax" method="post" autocomplete="off"><input type="hidden" name="error_return_url" value="/programming/2677"><input type="hidden" name="mid" value="programming">
+				<input type="hidden" name="act" value="procMemberLogin">
+				<input type="hidden" name="success_return_url" value="https://xe.obg.co.kr/programming/2677">
+				<input type="hidden" name="xe_validator_id" value="layouts/xedition/layout/1">
+				<fieldset>
+					<legend class="blind">로그인</legend>
+					<div class="control-group">
+						<div class="group">
+							<input type="text" name="user_id" id="uemail" required="required">
+							<span class="highlight"></span>
+							<span class="bar"></span>
+							<label class="info_label" for="uemail">아이디</label>
+						</div>
+						<div class="group">
+							<input type="password" name="password" id="upw" required="required">
+							<span class="highlight"></span>
+							<span class="bar"></span>
+							<label class="info_label" for="upw">비밀번호</label>
+						</div>
+					</div>
+						<div class="control-group">
+						<label class="chk_label" for="keepid_opt">
+							<input type="checkbox" name="keep_signed" id="keepid_opt" value="Y">
+							<span class="checkbox"></span> 로그인 유지						</label>
+						<div id="warning">
+							<p style="text-align:right;"><i class="xi-close"></i></p>
+							<p>브라우저를 닫더라도 로그인이 계속 유지될 수 있습니다.<br>로그인 유지 기능을 사용할 경우 다음 접속부터는 로그인할 필요가 없습니다.<br>단, PC방, 학교, 도서관 등 공공장소에서 이용 시 개인정보가 유출될 수 있으니 꼭 로그아웃을 해주세요.</p>
+							<div class="edge"></div>
+						</div>
+							<button type="submit" class="btn_submit">로그인</button>
+					</div>
+				</fieldset>
+			<input type="hidden" name="_rx_csrf_token" value="ud7YCPfmnFIH0S2B"></form>
+		</div>
+		<div class="login-footer">
+			<a href="https://xe.obg.co.kr/index.php?mid=programming&amp;act=dispMemberFindAccount">ID/PW 찾기</a>
+			<span class="f_bar">|</span>
+			<a href="https://xe.obg.co.kr/index.php?mid=programming&amp;act=dispMemberSignUpForm">회원가입</a>
+		</div>
+		<a href="https://xe.obg.co.kr/programming/2677#" class="btn_ly_popup"><span class="blind">닫기</span></a>
+	</div>
+	<script>
+	jQuery(function ($) {
+		var keep_msg = $("#warning");
+		$(".chk_label").on("mouseenter mouseleave focusin focusout", function (e) {
+			if(e.type == "mouseenter" || e.type == "focusin") {
+				keep_msg.show();
+			}
+			else {
+				keep_msg.hide();
+			}
+		});
+		$("#ly_login_btn, #ly_btn").click(function () {
+			$(".login_widget").show();
+			return false;
+		});
+		$(".btn_ly_popup").click(function () {
+			$(".login_widget").hide();
+			return false;
+		});
+		$("input").blur(function () {
+			var $this = $(this);
+			if ($this.val()) {
+				$this.addClass("used");
+			}
+			else {
+				$this.removeClass("used");
+			}
+		});
+	});
+	</script>
+</section><!-- /Login widget -->
+
+
+
+<!-- ETC -->
+<div id="rhymix_alert"></div>
+<div id="rhymix_debug_panel"></div>
+<div id="rhymix_debug_button"></div>
+
+<!-- BODY JS -->
+<script src="./4_files/e34a49dbf6d32f0e613b9855bfbcd3a0.ko.compiled.js.다운로드"></script>
+<script src="./4_files/82045bb7a5f1aa4766f9c859d552a7cc.ko.compiled.js.다운로드"></script>
+<script src="./4_files/ef1474bd5e047cfea08451c64349092e.ko.compiled.js.다운로드"></script>
+<script src="./4_files/autolink.js.다운로드"></script>
+<script src="./4_files/jquery-ui.min.js.다운로드"></script>
+<script src="./4_files/datepicker-ko.js.다운로드"></script>
+<script src="./4_files/rx_datepicker.js.다운로드"></script>
+<script src="./4_files/resize_image.js.다운로드"></script>
+<script src="./4_files/imagesloaded.pkgd.min.js.다운로드"></script>
+<script src="./4_files/jquery.cookie.js.다운로드"></script>
+<script src="./4_files/xe_textarea.js.다운로드"></script>
+<script src="./4_files/jquery.autogrowtextarea.min.js.다운로드"></script>
+<script src="./4_files/board(1).js.다운로드"></script>
+<script src="./4_files/jquery.masonry.min.js.다운로드"></script>
+<script src="./4_files/font_ng.js.다운로드"></script>
+<script src="./4_files/ncenter.js.다운로드"></script>
+
+
+
+<div class="fontcheckWrp"><p id="fontcheck_np1" style="font-family:&#39;나눔손글씨 펜&#39;,&#39;Nanum Pen Script&#39;,np,monospace,Verdana !important">Sketchbook5, 스케치북5</p><p id="fontcheck_np2" style="font-family:monospace,Verdana !important">Sketchbook5, 스케치북5</p></div><div id="bd_font_install"><div id="install_ng2"><button type="button" class="tg_blur2"></button><button type="button" class="tg_close2">X</button><h3>나눔글꼴 설치 안내</h3><br><h4>이 PC에는 <b>나눔글꼴</b>이 설치되어 있지 않습니다.</h4><p>이 사이트를 <b>나눔글꼴</b>로 보기 위해서는<br><b>나눔글꼴</b>을 설치해야 합니다.</p><div><a href="http://hangeul.naver.com/" target="_blank">나눔고딕 사이트로 가기</a></div><button type="button" class="tg_blur2"></button></div></div><div class="fontcheckWrp"><p id="fontcheck_ng3" style="font-family:&#39;나눔고딕&#39;,NanumGothic,monospace,Verdana !important">Sketchbook5, 스케치북5</p><p id="fontcheck_ng4" style="font-family:monospace,Verdana !important">Sketchbook5, 스케치북5</p></div><div id="xe_gallery_screen" style="position: fixed; background-color: rgb(0, 0, 0); z-index: 500; opacity: 0.7; inset: 0px;"></div><div id="xe_gallery_controls" style="position: fixed; overflow: hidden; z-index: 510; inset: 0px;"><button type="button" id="xe_gallery_prevbtn" style="left: 10px; background-position: 0px -64px; position: absolute; width: 64px; height: 64px; z-index: 530; cursor: pointer; border: 0px; margin: 0px; padding: 0px; background-color: transparent; background-image: url(&quot;https://xe.obg.co.kr/addons/resize_image/btn.png&quot;); background-repeat: no-repeat; opacity: 0.5; top: 441px; visibility: visible;"></button><button type="button" id="xe_gallery_closebtn" style="top: 10px; background-position: 0px 0px; position: absolute; width: 64px; height: 64px; z-index: 530; cursor: pointer; border: 0px; margin: 0px; padding: 0px; background-color: transparent; background-image: url(&quot;https://xe.obg.co.kr/addons/resize_image/btn.png&quot;); background-repeat: no-repeat; opacity: 0.5; left: 919.5px;"></button><button type="button" id="xe_gallery_nextbtn" style="right: 10px; background-position: 0px -128px; position: absolute; width: 64px; height: 64px; z-index: 530; cursor: pointer; border: 0px; margin: 0px; padding: 0px; background-color: transparent; background-image: url(&quot;https://xe.obg.co.kr/addons/resize_image/btn.png&quot;); background-repeat: no-repeat; opacity: 0.5; top: 441px; visibility: visible;"></button><img id="xe_gallery_holder" class="ui-draggable ui-draggable-handle" src="./4_files/f21f9dd92ac0e968984ebc97cd0a69b3.png" style="border: 5px solid white; max-width: none; border-radius: 5px; box-shadow: rgb(0, 0, 0) 0px 0px 10px; position: relative; left: 919.5px; top: 440.5px;"></div><div id="popup_menu_area" tabindex="0" style="display:none;"></div></body></html>

@@ -1,0 +1,8 @@
+random.uniform()
+괄호안의 두 실수 사이의 값 중에서 무작위 실수값을 만든다
+
+t.setup()
+창 사이즈
+
+write : bold
+글짜 찐하게
